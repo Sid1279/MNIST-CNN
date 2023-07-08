@@ -32,7 +32,7 @@ pip install -r requirements.txt
 
 6. Run all cells in the notebook to deploy the trained model to Amazon SageMaker.
 
-## Working
+## How does it work
 This notebook demonstrates the process of training a Convolutional Neural Network (CNN) on the MNIST dataset and deploying the trained model using Amazon SageMaker.
 
 1. Data Preparation: The script downloads the MNIST dataset and applies data transformations such as normalization and tensor conversion using torchvision.transforms. It creates custom Dataset objects and uses DataLoader to efficiently load and iterate over the training and test data.
