@@ -1,3 +1,4 @@
+# Model imports
 import torch
 import torch.nn as nn
 import torchvision.datasets as datasets
@@ -9,6 +10,12 @@ from torch.utils.tensorboard import SummaryWriter
 import matplotlib.pyplot as plt
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
+
+# Deployment imports
+import tarfile
+import sagemaker
+import boto3
+from sagemaker.pytorch import PyTorchModel
 
 
 # Define a custom dataset class for MNIST
@@ -152,7 +159,6 @@ print(f'Final Testing Accuracy: {test_accuracies[-1]:.2f}%')
 
 
 # Generate the confusion matrix for the training set
-model.eval()
 train_predictions = []
 train_true_labels = []
 
@@ -175,13 +181,8 @@ plt.show()
 
 
 # DEPLOYMENT
-import tarfile
-import sagemaker
-import boto3
-from sagemaker.pytorch import PyTorchModel
-
 torch.save(model.state_dict(), "MNIST.pt")
-model_file_key = 'MNIST.pt'
+model_file_key = 'MNIST.pth'
 archive_path = 'MNIST.tar.gz'
 
 # Create a tar.gz archive
@@ -191,7 +192,7 @@ with tarfile.open(archive_path, 'w:gz') as tar:
 print('tar.gz archive created successfully.')
 
 # Upload the model tar.gz archive to S3
-s3_bucket = 'sid-test-bucket'
+s3_bucket = 'sid-bucket'
 s3_model_key = 'MNIST.tar.gz'
 s3_model_path = f's3://{s3_bucket}/{s3_model_key}'
 
@@ -205,6 +206,7 @@ sess = sagemaker.Session()
 # Create a PyTorchModel
 pytorch_model = PyTorchModel(model_data=s3_model_path,
                              role=role,
+                             entry_point = inference.py,
                              framework_version='1.8.1',
                              py_version='py3',
                              sagemaker_session=sess)
