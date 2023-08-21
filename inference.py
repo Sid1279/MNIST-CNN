@@ -12,7 +12,6 @@ import json
 import os
 import boto3
 import tarfile
-# from config import general_cfg
 
 class NeuralNetwork(nn.Module):
     def __init__(self):
