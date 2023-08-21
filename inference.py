@@ -43,12 +43,11 @@ def load_and_preprocess_image(filename):
 
 
 def model_fn(model_dir):
-    s3_client = boto3.client('s3')
-    s3_client.download_file('sid-test-bucket-1279', 'MNIST.tar.gz', 'MNIST.tar.gz')
-    with tarfile.open('MNIST.tar.gz', 'r:gz') as tar:
-        tar.extract('model.pth')
+    model_path = os.path.join(model_dir, 'MNIST.tar.gz')
+    with tarfile.open(model_path, 'r:gz') as tar:
+        tar.extract('MNIST.pth')
     model = NeuralNetwork()
-    model.load_state_dict(torch.load('model.pth'))
+    model.load_state_dict(torch.load('MNIST.pth'))
     return model
 
 def input_fn(request_body, request_content_type):
