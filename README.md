@@ -56,7 +56,7 @@ This notebook demonstrates the process of training a Convolutional Neural Networ
 
 7. **Tensorflow Conversion**: Check out the very similar model made using Tensorflow in `MNIST Tensorflow CNN.ipynb`! It has all aspects/key features outlined above, except converted from PyTorch into Tensorflow (with the exception of model deployment).
 
-## DCGAN Image Generation
+## DCGAN Image Generation: `MNIST DCGAN PyTorch.ipynb`
 ### Model Architecture
 
 The DCGAN model consists of a generator and a discriminator, implemented using PyTorch. The generator creates high-quality images by learning from the training data distribution, while the discriminator tries to distinguish between real and fake images.
