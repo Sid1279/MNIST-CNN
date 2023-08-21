@@ -1,5 +1,7 @@
 # MNIST Image Classification 🖼️
 
+Note: ReadME needs to be updated to include DCGANs.
+
 This repository contains code for training, evaluating, and deploying a convolutional neural network (CNN) model for image classification on the MNIST dataset using PyTorch.
 
 ## Prerequisites 🌎
